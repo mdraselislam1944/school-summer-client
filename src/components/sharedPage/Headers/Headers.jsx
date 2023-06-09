@@ -11,7 +11,7 @@ const Headers = () => {
             {/* Home, Instructors,  Classes, Dashboard */}
             <Link className='btn' to='/'>Home</Link>
             <Link to='/instructors' className='lg:mx-5 btn'>Instructors</Link>
-            <Link className='btn' to='/Dashboard'>Classes</Link>
+            <Link className='btn' to='/class'>Classes</Link>
             </div>
             <div>
             <Link className='btn btn-primary' to='/login'>Login</Link>
