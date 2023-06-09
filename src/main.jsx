@@ -35,11 +35,13 @@ const router = createBrowserRouter([
       },
       {
         path:'/instructors',
-        element:<Instructors/>
+        element:<Instructors/>,
+        loader:()=>fetch('http://localhost:5000/instructors'),
       },
       {
         path:'/class',
-        element:<Classes/>
+        element:<Classes/>,
+        loader:()=>fetch('http://localhost:5000/classes'),
       }
     ]
   },
