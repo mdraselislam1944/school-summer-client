@@ -13,6 +13,7 @@ const Login = () => {
             .then(result => {
                 console.log(result);
                 alert('login successfully');
+
                 form.reset();
             })
             .catch(error => {

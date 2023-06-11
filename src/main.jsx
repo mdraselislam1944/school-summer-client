@@ -13,7 +13,12 @@ import Register from './components/components/Login/Register';
 import AuthProvider from './components/layout/Providers/AuthProviders';
 import Instructors from './components/components/Login/Instructors';
 import Classes from './components/components/Login/Classes';
-
+import Dashboard from './components/Pages/Dashboard/Dashboard';
+import AdminDashboard from './components/Pages/Dashboard/AdminDashboard';
+import InstructorsDashboard from './components/Pages/Dashboard/InstructorsDashboard';
+import HomeDashboard from './components/Pages/HomeDashboard';
+import StudentsDashboard from './components/Pages/Dashboard/StudentsDashboard';
+import Payment from './components/Pages/Payment/Payment';
 
 const router = createBrowserRouter([
   {
@@ -45,7 +50,33 @@ const router = createBrowserRouter([
       }
     ]
   },
-
+  {
+    path:"dashboard",
+    element:<Dashboard></Dashboard>,
+    children:[
+      {
+        path:'',
+        element:<HomeDashboard/>
+      },
+      {
+        path:'admin',
+        element:<AdminDashboard/>
+      },
+      {
+        path:'instructor',
+        element:<InstructorsDashboard/>
+      },
+      {
+        path:'student',
+        element:<StudentsDashboard/>
+      },
+      {
+        path:'payment/:id',
+        element:<Payment/>,
+        loader:({params})=>fetch(`http://localhost:5000/discountClasses/${params.id}`)
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

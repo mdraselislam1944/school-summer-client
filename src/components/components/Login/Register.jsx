@@ -6,7 +6,8 @@ import { AuthContext } from '../../layout/Providers/AuthProviders';
 import { FaSpinner } from "react-icons/fa";
 
 const Register = () => {
-    const { createUser, googleLogin,updateProfileDetail,loading} = useContext(AuthContext);
+    const { createUser, googleLogin, updateProfileDetail, loading } = useContext(AuthContext);
+    console.log(loading);
     const handleGoogleSignIn = () => {
         googleLogin()
             .then(result => {
@@ -52,7 +53,24 @@ const Register = () => {
                                 console.log(error.message);
                             });
                         // navigate('/login');
-                        console.log(result);
+                        const student={
+                            email:register.email,
+                        }
+                    console.log(student)
+                        fetch('http://localhost:5000/students', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(student)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                alert('added successfully');
+                            })
+                            .catch(error => console.log(error.message));
+
                     })
                     .catch(error => {
                         alert(error.message);
@@ -73,9 +91,9 @@ const Register = () => {
                 <input required type="email" name="email" id="email" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='Enter your Email' />
                 <input required type="password" name="password" id="password" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='password' />
                 <input required type="file" name="image" id="image" className=' w-full max-w-xs mx-auto my-2' />
-              {
-                loading?<span className='btn btn-success mx-auto w-full max-w-xs'><FaSpinner></FaSpinner></span>:<input className='btn btn-success mx-auto w-full max-w-xs' type="submit" value="register" />
-              }
+                {
+                    loading ? <span className='btn btn-success mx-auto w-full max-w-xs'><FaSpinner></FaSpinner></span> : <input className='btn btn-success mx-auto w-full max-w-xs' type="submit" value="register" />
+                }
             </form>
             <button onClick={handleGoogleSignIn} className='btn my-2 flex justify-center items-center mx-auto w-full max-w-xs btn-success text-white'>
                 <FaGofore />
