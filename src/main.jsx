@@ -84,7 +84,7 @@ const router = createBrowserRouter([
       {
         path:"instructor/:id",
         element:<Update/>,
-        loader:({params})=>fetch(`http://localhost:5000/discountClasses/${params.id}`)
+        loader:({params})=>fetch(`http://localhost:5000/instructor/${params.id}`)
       }
     ]
   }
