@@ -19,6 +19,8 @@ import InstructorsDashboard from './components/Pages/Dashboard/InstructorsDashbo
 import HomeDashboard from './components/Pages/HomeDashboard';
 import StudentsDashboard from './components/Pages/Dashboard/StudentsDashboard';
 import Payment from './components/Pages/Payment/Payment';
+import AddClass from './components/Pages/Dashboard/Instructors/AddClass';
+import Update from './components/Pages/Dashboard/Instructors/Update';
 
 const router = createBrowserRouter([
   {
@@ -55,8 +57,8 @@ const router = createBrowserRouter([
     element:<Dashboard></Dashboard>,
     children:[
       {
-        path:'',
-        element:<HomeDashboard/>
+        path:"",
+        element:<InstructorsDashboard/>
       },
       {
         path:'admin',
@@ -73,6 +75,15 @@ const router = createBrowserRouter([
       {
         path:'payment/:id',
         element:<Payment/>,
+        loader:({params})=>fetch(`http://localhost:5000/discountClasses/${params.id}`)
+      },
+      {
+        path:"instructor/addClass",
+        element:<AddClass/>
+      },
+      {
+        path:"instructor/:id",
+        element:<Update/>,
         loader:({params})=>fetch(`http://localhost:5000/discountClasses/${params.id}`)
       }
     ]

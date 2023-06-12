@@ -7,7 +7,6 @@ import { FaSpinner } from "react-icons/fa";
 
 const Register = () => {
     const { createUser, googleLogin, updateProfileDetail, loading } = useContext(AuthContext);
-    console.log(loading);
     const handleGoogleSignIn = () => {
         googleLogin()
             .then(result => {
@@ -56,7 +55,6 @@ const Register = () => {
                         const student={
                             email:register.email,
                         }
-                    console.log(student)
                         fetch('http://localhost:5000/students', {
                             method: 'POST',
                             headers: {

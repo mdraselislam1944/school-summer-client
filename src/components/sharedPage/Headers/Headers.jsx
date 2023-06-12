@@ -26,7 +26,7 @@ const Headers = () => {
             <div>
                 {
                     user?<div className='flex justify-around items-center gap-4'>
-                         <Link to='dashboard/student' className='btn btn-secondary'>Dashboard</Link>
+                         <Link to='dashboard' className='btn btn-secondary'>Dashboard</Link>
                     <span className='rounded'><img className='h-16 w-16 rounded-full' src={user?.photoURL} alt="" /></span>
                     <button onClick={handleLogout} className='btn btn-primary'>LogOut</button>
                     </div>:<>
