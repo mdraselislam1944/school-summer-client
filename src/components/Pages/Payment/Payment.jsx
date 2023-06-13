@@ -4,15 +4,17 @@ import { Elements } from '@stripe/react-stripe-js';
 import CheckOut from './CHeckOut';
 const stripePromise = loadStripe('pk_test_51NEmG3IxzytApYUlrVvQjOkLBL4TdwZ6aTq4Mz4FnMKHgzjX83FRLIjyEjCddXis3csWUdu0pnLWkkt5QSxJAjb300a5y8iSib');
 const Payment = () => {
-    const { price,discount } = useLoaderData();
+    const { price,discount,_id} = useLoaderData();
+    const course=useLoaderData();
+    // console.log(course)
+
     const fixedMoney=parseFloat(price-discount)
-    console.log(price)
     const tk = parseFloat(fixedMoney.toFixed(2));
     return (
         <div>
-            <h1>Please Payment : ${tk}</h1>
+            <h1 className='text-center text-3xl'>Please Payment : ${tk}</h1>
             <Elements stripe={stripePromise}>
-                <CheckOut price={price}></CheckOut>
+                <CheckOut price={price} _id={_id}  course={course}></CheckOut>
             </Elements>
         </div>
     );

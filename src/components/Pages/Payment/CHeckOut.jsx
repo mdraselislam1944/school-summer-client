@@ -4,14 +4,14 @@ import { useContext } from 'react';
 import { AuthContext } from '../../layout/Providers/AuthProviders';
 import swal from 'sweetalert';
 
-const CheckOut = ({ price }) => {
-    
+const CheckOut = ({ price,course,_id }) => {
+    console.log(_id)
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
     const [clientSecret,setClientSecret]=useState('');
     const user=useContext(AuthContext)
-  
+
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
             method: "POST",
@@ -64,13 +64,35 @@ const CheckOut = ({ price }) => {
         if(confirmedError){
             console.log(confirmedError)
         }
-        console.log(paymentIntent.status);
         swal({
             title: paymentIntent.status,
             text: "Thank you!",
-            icon: "success",
+            icon: "payment success",
             button: "ok!",
           });
+          const paymentHistory={
+            course:course,
+            email:user?.user?.email,
+            paymentId:paymentIntent.id,
+          };
+          console.log(paymentHistory)
+          console.log(paymentIntent.id)
+          fetch(`http://localhost:5000/studentPayment/${_id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(paymentIntent.id)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    alert('update successfully');
+                    form.reset();
+                }
+                Navigate('/dashboard');
+            });
+
     };
     return (
         <>

@@ -6,22 +6,28 @@ import { useEffect } from 'react';
 
 const StudentsDashboard = () => {
     const user=useContext(AuthContext);
-    console.log(user?.user?.email);
-    const [student,setStudent]=useState();
-    if(user){
-       useEffect(()=>{
-        fetch('http://localhost:5000/students/')
+    const email=user?.user?.email;
+    const [student,setStudent]=useState([]);
+        useEffect(()=>{
+            fetch(`http://localhost:5000/studentPayment/${email}`)
         .then(res=>res.json())
         .then(data=>{
-            console.log(data);
             setStudent(data)
         });
-       },[])
-     
-    }
+        },[email])
+  if(student.length>0){
+    student.map(student1=>{
+        console.log(student1)
+        // student1.paymentId
+        // student1.course.image instructor name
+    })
+  }
     return (
         <div>
-            <h1>Student Dashboard</h1>
+            <h1>Student Dashboard {student.length}</h1>
+            {
+                
+            }
         </div>
     );
 };

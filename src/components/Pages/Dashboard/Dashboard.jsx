@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import InstructorsDashboard from './InstructorsDashboard';
+// import InstructorsDashboard from './InstructorsDashboard';
 
 const Dashboard = () => {
     return (
@@ -12,6 +12,8 @@ const Dashboard = () => {
                 </div>
                 <div>
                 <Link to='instructor/addClass' className='btn btn-primary'>Add Class</Link>
+                <Link to='student' className='btn btn-primary mx-2'>Student Dashboard</Link>
+                <Link to='admin' className='btn btn-primary mx-2'>Admin Dashboard</Link>
                 </div>
                 <div>
                 </div>

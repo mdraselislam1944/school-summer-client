@@ -10,8 +10,32 @@ const Register = () => {
     const handleGoogleSignIn = () => {
         googleLogin()
             .then(result => {
-                console.log(result);
-                alert('login successfully');
+                const student = {
+                    email: result.user.email,
+                    image: result.user.photoURL,
+                    role: 'student',
+                }
+                fetch('http://localhost:5000/students')
+                .then(res=>res.json())
+                .then(data=>{
+                    const email=data.find(data=>data.email===result.user.email);
+                   if(!email){
+                    fetch('http://localhost:5000/students', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(student)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            console.log(data);
+                            alert('added successfully');
+                        })
+                        .catch(error => console.log(error.message));
+                   }
+                })
+
             })
             .catch(error => {
                 console.log(error.message);
@@ -52,8 +76,10 @@ const Register = () => {
                                 console.log(error.message);
                             });
                         // navigate('/login');
-                        const student={
-                            email:register.email,
+                        const student = {
+                            email: register.email,
+                            image: register.image,
+                            role: 'student',
                         }
                         fetch('http://localhost:5000/students', {
                             method: 'POST',

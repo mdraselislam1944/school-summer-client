@@ -10,36 +10,6 @@ const Home = () => {
   const [discount, setDiscount] = useState();
   const user = useContext(AuthContext);
   const [student, setStudent] = useState([])
-  // useEffect(()=>{
-  //     fetch(`http://localhost:5000/students/${user?.user?.email}`)
-  //     .then((res) => res.json())
-  //     .then((data) =>{
-  //       console.log(data)
-  //       if(data[0]?.id)
-  //      {
-  //       // console.log(data[0].id)
-  //      setStudent(data[0].id)
-  //      }
-  //     })
-  // },[user?.user?.email])
-  // const handleEnroll = (id) => {
-  //   if (user) {
-  //     console.log(student)
-  //     const studentEnroll = [...student, id]
-  //     console.log(studentEnroll)
-  //     const payload = { id: studentEnroll };
-  //     fetch(`http://localhost:5000/students/${user.user.email}`, {
-  //       method: 'PATCH',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(payload),
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => console.log(data))
-  //       .catch((error) => console.log(error));
-  //   }
-  // };
   useEffect(() => {
     fetch('http://localhost:5000/instructors')
       .then(res => res.json())
@@ -51,6 +21,26 @@ const Home = () => {
       .then(res => res.json())
       .then(data => setDiscount(data));
   }, [])
+  const handleCLass = (discount) => {
+    const enrollHistory = {
+      _id:discount._id,
+      course: discount,
+      email: user?.user?.email,
+      paymentId: null,
+    };
+    fetch('http://localhost:5000/studentPayment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(enrollHistory)
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => console.log(error.message));
+  }
   return (
     <div>
       <Slider />
@@ -66,6 +56,7 @@ const Home = () => {
                 <p>Course Fee: ${data.price}</p>
                 <div className="card-actions justify-end">
                   <button onClick={() => handleEnroll(data?._id)} className="btn btn-primary">Enroll Now</button>
+                  {/* <Link to={`dashboard/payment/${data?._id}`}><button  className="btn btn-primary">enroll now</button></Link> */}
                 </div>
               </div>
             </div>
@@ -105,7 +96,7 @@ const Home = () => {
                 </div>
                 <p className='text-xl'>New Price: ${(discount.price - (discount.discount / 100) * discount.price).toFixed(2)}</p>
                 <div className="card-actions justify-end">
-                 <Link to={`dashboard/payment/${discount._id}`}><button  className="btn btn-primary">enroll now</button></Link>
+                  <Link to={`dashboard/payment/${discount._id}`}><button onClick={() => handleCLass(discount)} className="btn btn-primary">enroll now</button></Link>
                 </div>
               </div>
             </div>
