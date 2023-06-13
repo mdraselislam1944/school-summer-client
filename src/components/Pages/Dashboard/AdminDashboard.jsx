@@ -13,7 +13,7 @@ const AdminDashboard = () => {
             .then(data => {
                 setInstructor(data)
             })
-    }, []);
+    }, [instructors]);
 
     useEffect(() => {
         fetch('http://localhost:5000/students')
@@ -81,6 +81,35 @@ const AdminDashboard = () => {
             }
           });
       }
+      const handleApprove=(id,status)=>{
+        if(status){
+            status=null;
+        }
+        else{
+            status='approved'
+        }
+        const requestBody = {
+            status: status
+          };
+        
+        fetch(`http://localhost:5000/instructor/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(requestBody)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.modifiedCount > 0) {
+                    swal({
+                        title: 'change',
+                        text: "You clicked the button!",
+                        icon: "success",
+                      });
+                }
+            });
+      }
       
     return (
         <div className='ms-10'>
@@ -124,8 +153,7 @@ const AdminDashboard = () => {
                                     <td>10</td>
                                     <td>${instructor.price}</td>
                                     <th>
-                                        <button onClick={() => handleDelete(instructor._id)} className="btn btn-accent">Approved</button>
-                                        <button onClick={() => handleDelete(instructor._id)} className="btn btn-accent mx-4">Denied</button>
+                                        <button onClick={() => handleApprove(instructor._id,instructor.status)} className="btn btn-accent mx-3">{instructor.status?'Deny':'Approve'}</button>
                                         <Link to={`instructor/${instructor._id}`}><button className="btn btn-info ">feedback</button></Link>
                                     </th>
                                 </tr>
