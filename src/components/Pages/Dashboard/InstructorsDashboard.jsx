@@ -10,7 +10,7 @@ const InstructorsDashboard = () => {
     const [instructors, setInstructor] = useState();
     const user = useContext(AuthContext);
     useEffect(() => {
-        fetch(`http://localhost:5000/instructors/${user?.user?.email}`)
+        fetch(`http://localhost:5000/instructor/${user?.user?.email}`)
             .then(res => res.json())
             .then(data => setInstructor(data));
     }, [user])

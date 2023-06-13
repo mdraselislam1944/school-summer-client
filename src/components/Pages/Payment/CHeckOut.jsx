@@ -71,8 +71,6 @@ const CheckOut = ({ price,course,_id }) => {
             button: "ok!",
           });
           const paymentHistory={
-            course:course,
-            email:user?.user?.email,
             paymentId:paymentIntent.id,
           };
           console.log(paymentHistory)

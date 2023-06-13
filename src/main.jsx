@@ -76,7 +76,7 @@ const router = createBrowserRouter([
       {
         path:'payment/:id',
         element:<Payment/>,
-        loader:({params})=>fetch(`http://localhost:5000/discountClasses/${params.id}`)
+        loader:({params})=>fetch(`http://localhost:5000/instructors/${params.id}`)
       },
       {
         path:"instructor/addClass",
