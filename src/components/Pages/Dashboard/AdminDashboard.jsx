@@ -154,7 +154,7 @@ const AdminDashboard = () => {
                                     <td>${instructor.price}</td>
                                     <th>
                                         <button onClick={() => handleApprove(instructor._id,instructor.status)} className="btn btn-accent mx-3">{instructor.status?'Deny':'Approve'}</button>
-                                        <Link to={`instructor/${instructor._id}`}><button className="btn btn-info ">feedback</button></Link>
+                                        <Link to={`/dashboard/adminFeedback/${instructor._id}`}><button className="btn btn-info ">feedback</button></Link>
                                     </th>
                                 </tr>
                             </tbody>)

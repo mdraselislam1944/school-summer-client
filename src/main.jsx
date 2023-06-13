@@ -21,6 +21,7 @@ import StudentsDashboard from './components/Pages/Dashboard/StudentsDashboard';
 import Payment from './components/Pages/Payment/Payment';
 import AddClass from './components/Pages/Dashboard/Instructors/AddClass';
 import Update from './components/Pages/Dashboard/Instructors/Update';
+import AdminFeedBack from './components/Pages/Dashboard/AdminFeedBack';
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,11 @@ const router = createBrowserRouter([
       {
         path:"instructor/:id",
         element:<Update/>,
+        loader:({params})=>fetch(`http://localhost:5000/instructor/${params.id}`)
+      },
+      {
+        path:"adminFeedback/:id",
+        element:<AdminFeedBack/>,
         loader:({params})=>fetch(`http://localhost:5000/instructor/${params.id}`)
       }
     ]
