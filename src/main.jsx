@@ -49,7 +49,7 @@ const router = createBrowserRouter([
       {
         path:'/class',
         element:<Classes/>,
-        loader:()=>fetch('http://localhost:5000/classes'),
+        loader:()=>fetch('http://localhost:5000/instructors'),
       }
     ]
   },
