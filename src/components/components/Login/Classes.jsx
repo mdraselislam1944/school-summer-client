@@ -95,7 +95,7 @@ const Classes = () => {
     const user = useContext(AuthContext);
     const classData = useLoaderData();
     const handleSelect = (id,filterClass) => {
-        fetch(`http://localhost:5000/studentPayment/${user?.user?.email}`)
+        fetch(` https://summer-school-camp-server-mdraselislam1944.vercel.app/studentPayment/${user?.user?.email}`)
             .then(res => res.json())
             .then(data => {
                 const searchSelected = data.find(data => data.course._id == id);
@@ -109,7 +109,7 @@ const Classes = () => {
                         email: user?.user?.email,
                         paymentId: null,
                     };
-                    fetch('http://localhost:5000/studentPayment', {
+                    fetch(' https://summer-school-camp-server-mdraselislam1944.vercel.app/studentPayment', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

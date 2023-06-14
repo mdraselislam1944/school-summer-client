@@ -28,7 +28,7 @@ const StudentsDashboard = () => {
           })
           .then((willDelete) => {
             if (willDelete) {
-                fetch(`http://localhost:5000/studentPayment/${id}`, {
+                fetch(` https://summer-school-camp-server-mdraselislam1944.vercel.app/studentPayment/${id}`, {
                     method: 'DELETE'
                 })
                 .then(res => res.json())
