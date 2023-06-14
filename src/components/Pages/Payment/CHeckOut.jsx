@@ -12,7 +12,7 @@ const CheckOut = ({ price,course,_id }) => {
     const user=useContext(AuthContext)
 
     useEffect(() => {
-        fetch(' https://summer-school-camp-server-mdraselislam1944.vercel.app/create-payment-intent', {
+        fetch('http://localhost:5000/create-payment-intent', {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -76,7 +76,7 @@ const CheckOut = ({ price,course,_id }) => {
           console.log(paymentIntent.id)
 
         //   const paymentId='858747438843873478348734';
-          fetch(` https://summer-school-camp-server-mdraselislam1944.vercel.app/studentPayment/${_id}`, {
+          fetch(`http://localhost:5000/studentPayment/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -87,9 +87,9 @@ const CheckOut = ({ price,course,_id }) => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     // alert('update successfully');
-                    form.reset();
+                    // form.reset();
                 }
-                Navigate('/dashboard');
+                // Navigate('/dashboard');
             })
 
     };
