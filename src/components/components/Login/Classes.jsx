@@ -104,7 +104,7 @@ const Classes = () => {
                 }
                 else {
                     const enrollHistory = {
-                        _id:id,
+                        id:id,
                         course: filterClass,
                         email: user?.user?.email,
                         paymentId: null,

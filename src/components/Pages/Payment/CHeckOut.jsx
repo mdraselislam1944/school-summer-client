@@ -86,7 +86,7 @@ const CheckOut = ({ price,course,_id }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.modifiedCount > 0) {
-                    alert('update successfully');
+                    // alert('update successfully');
                     form.reset();
                 }
                 Navigate('/dashboard');
