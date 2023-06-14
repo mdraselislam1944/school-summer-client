@@ -11,13 +11,13 @@ const Home = () => {
   const user = useContext(AuthContext);
   const [student, setStudent] = useState([])
   useEffect(() => {
-    fetch('http://localhost:5000/instructors')
+    fetch('https://summer-school-camp-server.vercel.app/instructors')
       .then(res => res.json())
       .then(data => setInstructor(data));
   }, [])
 
   useEffect(() => {
-    fetch('http://localhost:5000/discountClasses')
+    fetch('https://summer-school-camp-server.vercel.app/discountClasses')
       .then(res => res.json())
       .then(data => setDiscount(data));
   }, [])
@@ -28,7 +28,7 @@ const Home = () => {
       email: user?.user?.email,
       paymentId: null,
     };
-    fetch('http://localhost:5000/studentPayment', {
+    fetch('https://summer-school-camp-server.vercel.app/studentPayment', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

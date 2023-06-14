@@ -8,7 +8,7 @@ const AdminDashboard = () => {
     const [instructors, setInstructor] = useState();
     const [users, setUsers] = useState();
     useEffect(() => {
-        fetch('http://localhost:5000/instructors')
+        fetch('https://summer-school-camp-server.vercel.app/instructors')
             .then(res => res.json())
             .then(data => {
                 setInstructor(data)
@@ -16,7 +16,7 @@ const AdminDashboard = () => {
     }, [instructors]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/students')
+        fetch('https://summer-school-camp-server.vercel.app/students')
             .then(res => res.json())
             .then(data => {
                 setUsers(data)
@@ -34,7 +34,7 @@ const AdminDashboard = () => {
           role: role
         };
       
-        fetch(`http://localhost:5000/students/${id}`, {
+        fetch(`https://summer-school-camp-server.vercel.app/students/${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
           role: role
         };
       
-        fetch(`http://localhost:5000/students/${id}`, {
+        fetch(`https://summer-school-camp-server.vercel.app/students/${id}`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json'
@@ -92,7 +92,7 @@ const AdminDashboard = () => {
             status: status
           };
         
-        fetch(`http://localhost:5000/instructor/${id}`, {
+        fetch(`https://summer-school-camp-server.vercel.app/instructor/${id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

@@ -10,7 +10,7 @@ const InstructorsDashboard = () => {
     const [instructors, setInstructor] = useState();
     const user = useContext(AuthContext);
     useEffect(() => {
-        fetch(`http://localhost:5000/instructor/${user?.user?.email}`)
+        fetch(`https://summer-school-camp-server.vercel.app/instructor/${user?.user?.email}`)
             .then(res => res.json())
             .then(data => setInstructor(data));
     }, [user])
@@ -24,7 +24,7 @@ const InstructorsDashboard = () => {
           })
           .then((willDelete) => {
             if (willDelete) {
-                fetch(`http://localhost:5000/instructors/${id}`, {
+                fetch(`https://summer-school-camp-server.vercel.app/instructors/${id}`, {
                     method: 'DELETE'
                 })
                 .then(res => res.json())

@@ -35,7 +35,7 @@ const AddClass = () => {
             .then((data) => {
                 addClass.image = data.data.display_url;
 
-                fetch('http://localhost:5000/instructors',{
+                fetch('https://summer-school-camp-server.vercel.app/instructors',{
                     method: 'POST',
                     headers: {
                       'Content-Type': 'application/json'

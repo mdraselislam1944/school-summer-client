@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       {
         path:'/',
         element:<Home/>,
-        loader:()=>fetch('http://localhost:5000/classes'),
+        loader:()=>fetch('https://summer-school-camp-server.vercel.app/classes'),
       },
       {
         path:'/login',
@@ -44,12 +44,12 @@ const router = createBrowserRouter([
       {
         path:'/instructors',
         element:<Instructors/>,
-        loader:()=>fetch('http://localhost:5000/instructors'),
+        loader:()=>fetch('https://summer-school-camp-server.vercel.app/instructors'),
       },
       {
         path:'/class',
         element:<Classes/>,
-        loader:()=>fetch('http://localhost:5000/instructors'),
+        loader:()=>fetch('https://summer-school-camp-server.vercel.app/instructors'),
       }
     ]
   },
@@ -76,7 +76,7 @@ const router = createBrowserRouter([
       {
         path:'payment/:id',
         element:<Payment/>,
-        loader:({params})=>fetch(`http://localhost:5000/instructors/${params.id}`)
+        loader:({params})=>fetch(`https://summer-school-camp-server.vercel.app/instructors/${params.id}`)
       },
       {
         path:"instructor/addClass",
@@ -85,12 +85,12 @@ const router = createBrowserRouter([
       {
         path:"instructor/:id",
         element:<Update/>,
-        loader:({params})=>fetch(`http://localhost:5000/instructor/${params.id}`)
+        loader:({params})=>fetch(`https://summer-school-camp-server.vercel.app/instructor/${params.id}`)
       },
       {
         path:"adminFeedback/:id",
         element:<AdminFeedBack/>,
-        loader:({params})=>fetch(`http://localhost:5000/instructor/${params.id}`)
+        loader:({params})=>fetch(`https://summer-school-camp-server.vercel.app/instructor/${params.id}`)
       }
     ]
   }

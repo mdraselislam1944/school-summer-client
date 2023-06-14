@@ -15,12 +15,12 @@ const Register = () => {
                     image: result.user.photoURL,
                     role: 'student',
                 }
-                fetch('http://localhost:5000/students')
+                fetch('https://summer-school-camp-server.vercel.app/students')
                 .then(res=>res.json())
                 .then(data=>{
                     const email=data.find(data=>data.email===result.user.email);
                    if(!email){
-                    fetch('http://localhost:5000/students', {
+                    fetch('students', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ const Register = () => {
                             image: register.image,
                             role: 'student',
                         }
-                        fetch('http://localhost:5000/students', {
+                        fetch('https://summer-school-camp-server.vercel.app/students', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

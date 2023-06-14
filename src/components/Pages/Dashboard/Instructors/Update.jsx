@@ -35,7 +35,7 @@ const Update = () => {
             form.reset();
         }
 
-        fetch(`http://localhost:5000/instructors/${description?._id}`, {
+        fetch(`https://summer-school-camp-server.vercel.app/instructors/${description?._id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

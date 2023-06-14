@@ -5,7 +5,6 @@ import { AuthContext } from '../../layout/Providers/AuthProviders';
 import swal from 'sweetalert';
 
 const CheckOut = ({ price,course,_id }) => {
-    console.log(_id)
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
@@ -65,7 +64,7 @@ const CheckOut = ({ price,course,_id }) => {
             console.log(confirmedError)
         }
         swal({
-            title: paymentIntent.status,
+            title: paymentIntent?.status,
             text: "Thank you!",
             icon: "payment success",
             button: "ok!",
@@ -75,12 +74,14 @@ const CheckOut = ({ price,course,_id }) => {
           };
           console.log(paymentHistory)
           console.log(paymentIntent.id)
+
+        //   const paymentId='858747438843873478348734';
           fetch(`http://localhost:5000/studentPayment/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(paymentIntent.id)
+            body: JSON.stringify(paymentHistory)
         })
             .then(res => res.json())
             .then(data => {
@@ -89,7 +90,7 @@ const CheckOut = ({ price,course,_id }) => {
                     form.reset();
                 }
                 Navigate('/dashboard');
-            });
+            })
 
     };
     return (

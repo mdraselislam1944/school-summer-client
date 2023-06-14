@@ -11,7 +11,7 @@ const StudentsDashboard = () => {
     const email = user?.user?.email;
     const [students, setStudent] = useState([]);
     useEffect(() => {
-        fetch(`http://localhost:5000/studentPayment/${email}`)
+        fetch(`https://summer-school-camp-server.vercel.app/studentPayment/${email}`)
             .then(res => res.json())
             .then(data => {
                 setStudent(data)
@@ -24,10 +24,9 @@ const StudentsDashboard = () => {
         })
     }
 
-    const handlePayment=(price)=>{
-
+    const handleDeleteClass=(id)=>{
+        console.log(id)
     }
-
 
 
     return (
@@ -56,8 +55,8 @@ const StudentsDashboard = () => {
                                  <button disabled className='btn btn-info mx-4 '>Payment</button>
                                 <button disabled className='btn btn-secondary '>Delete</button>
                                 </>:<>
-                                <Link to={`/dashboard/payment/${student._id}`}><button onClick={() => handlePayment(student.course.price)} className="btn btn-primary">enroll now</button></Link>
-                                <button className='btn btn-secondary '>Delete</button>
+                                <Link to={`/dashboard/payment/${student._id}`}><button className="btn btn-primary mx-4">enroll now</button></Link>
+                                <button onClick={()=>handleDeleteClass(student._id)} className='btn btn-secondary '>Delete</button>
                                 </>
                                }
                             </td>
