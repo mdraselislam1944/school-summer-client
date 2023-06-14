@@ -17,8 +17,9 @@ const StudentsDashboard = () => {
                 setStudent(data)
             });
     }, [email])
-
+    console.log(students)
     const handleDeleteClass=(id)=>{
+  
         swal({
             title: "Are you delete?",
             text: "Once deleted, you will not be able to recover this imaginary file!",
