@@ -17,15 +17,35 @@ const StudentsDashboard = () => {
                 setStudent(data)
             });
     }, [email])
-    if (students.length > 0) {
-        students.map(student1 => {
-            // console.log(student1.course.price)
-            
-        })
-    }
 
     const handleDeleteClass=(id)=>{
-        console.log(id)
+        swal({
+            title: "Are you delete?",
+            text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                fetch(`http://localhost:5000/studentPayment/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(res => res.json())
+                .then(data => {
+                    setStudent(students?.filter(student=>student._id!==id));
+                    console.log(data);
+                    if (data.deletedCount > 0) {
+                        // alert('delete successful');
+                    }
+                })
+              swal("Poof! Your imaginary file has been deleted!", {
+                icon: "success",
+              });
+            } else {
+              swal("Your imaginary file is safe!");
+            }
+          });
     }
 
 
