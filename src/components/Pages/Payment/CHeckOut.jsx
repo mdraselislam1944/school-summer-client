@@ -4,20 +4,20 @@ import { useContext } from 'react';
 import { AuthContext } from '../../layout/Providers/AuthProviders';
 import swal from 'sweetalert';
 
-const CheckOut = ({ price,course,_id }) => {
+const CheckOut = ({ price, course, _id }) => {
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
-    const [clientSecret,setClientSecret]=useState('');
-    const user=useContext(AuthContext)
-
+    const [clientSecret, setClientSecret] = useState('');
+    const user = useContext(AuthContext)
+    console.log(course.course._id)
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
             method: "POST",
             headers: {
                 "content-type": "application/json",
             },
-            body: JSON.stringify({price})
+            body: JSON.stringify({ price })
         })
             .then(res => res.json())
             .then(data => {
@@ -48,19 +48,19 @@ const CheckOut = ({ price,course,_id }) => {
             setCardError('');
             console.log(paymentMethod);
         }
-        const {paymentIntent,error:confirmedError}=await stripe.confirmCardPayment(
+        const { paymentIntent, error: confirmedError } = await stripe.confirmCardPayment(
             clientSecret,
             {
-                payment_method:{
-                    card:card,
-                    billing_details:{
+                payment_method: {
+                    card: card,
+                    billing_details: {
                         name: user?.user?.displayName,
-                        
+
                     },
                 },
             },
         );
-        if(confirmedError){
+        if (confirmedError) {
             console.log(confirmedError)
         }
         swal({
@@ -68,15 +68,15 @@ const CheckOut = ({ price,course,_id }) => {
             text: "Thank you!",
             icon: "payment success",
             button: "ok!",
-          });
-          const paymentHistory={
-            paymentId:paymentIntent.id,
-          };
-          console.log(paymentHistory)
-          console.log(paymentIntent.id)
+        });
+        const paymentHistory = {
+            paymentId: paymentIntent.id,
+        };
+        console.log(paymentHistory)
+        console.log(paymentIntent.id)
 
         //   const paymentId='858747438843873478348734';
-          fetch(`http://localhost:5000/studentPayment/${_id}`, {
+        fetch(`http://localhost:5000/studentPayment/${_id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'
@@ -90,6 +90,22 @@ const CheckOut = ({ price,course,_id }) => {
                     // form.reset();
                 }
                 // Navigate('/dashboard');
+                const seat=course.course.seat-1;
+                fetch(`http://localhost:5000/instructorSeat/${course?.course?._id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({seat})
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.modifiedCount > 0) {
+                            alert('update successfully');
+                            // form.reset();
+                        }
+                        Navigate('/dashboard');
+                    });
             })
 
     };
