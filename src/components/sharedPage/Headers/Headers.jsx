@@ -10,10 +10,15 @@ const Headers = () => {
     const handleLogout=()=>{
         logOut()
         .then(res=>res.json())
-        .catch(error=>alert("Logout Successfully"))
+    
+        .catch(error=>{
+            localStorage.removeItem('set-token-for-user');
+            alert("Logout Successfully")
+        })
     }
     return (
-        <div className='lg:flex justify-between items-center mx-10'>
+        <div  data-theme={"dark"}>
+             <div className='lg:flex justify-between items-center lg:mx-10'>
             <div>
                 <img src={logo}  className='w-32 h-24' alt="" />
             </div>
@@ -25,7 +30,7 @@ const Headers = () => {
             </div>
             <div>
                 {
-                    user?<div className='flex justify-around items-center gap-4'>
+                    user?<div className='lg:flex lg:justify-around lg:items-center gap-4'>
                          <Link to='dashboard' className='btn btn-secondary'>Dashboard</Link>
                     <span className='rounded'><img className='h-16 w-16 rounded-full' src={user?.photoURL} alt="" /></span>
                     <button onClick={handleLogout} className='btn btn-primary'>LogOut</button>
@@ -34,6 +39,7 @@ const Headers = () => {
                     </>
                 }
             </div>
+        </div>
         </div>
     );
 };

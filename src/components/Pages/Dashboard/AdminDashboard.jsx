@@ -24,6 +24,7 @@ const AdminDashboard = () => {
     }, [users]);
 
     const handleAdmin = (id, role) => {
+        console.log('hello')
         if (role === 'admin') {
           role = 'student';
         } else {
@@ -131,7 +132,9 @@ const AdminDashboard = () => {
                             </tr>
                         </thead>
                         {
-                            instructors?.map(instructor => <tbody key={instructor._id}>
+                            // instructors?.map(instructor => <tbody key={instructor._id}>
+                            instructors?.map((instructor, index) => <tbody key={`${instructor._id}-${index}`}>
+
                                 <tr>
                                     <th>#</th>
                                     <td>
@@ -179,7 +182,9 @@ const AdminDashboard = () => {
                             </tr>
                         </thead>
                         {
-                            users?.map(user => <tbody key={user._id}>
+                            // users?.map(user => <tbody key={user._id}>
+                            users?.map((user, index) => <tbody key={`${user._id}-${index}`}>
+
                                 <tr>
                                     <th>#</th>
                                     <td>
@@ -210,3 +215,5 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+

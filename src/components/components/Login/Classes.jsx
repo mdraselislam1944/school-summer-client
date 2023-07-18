@@ -5,7 +5,7 @@ import { AuthContext } from '../../layout/Providers/AuthProviders';
 import swal from 'sweetalert';
 const Classes = () => {
     const user = useContext(AuthContext);
-    const classData = useLoaderData();
+    const classData=useLoaderData().filter(classData=>classData.status!==null);
     const handleSelect = (id,filterClass) => {
         fetch(` https://summer-school-camp-server-mdraselislam1944.vercel.app/studentPayment/${user?.user?.email}`)
             .then(res => res.json())

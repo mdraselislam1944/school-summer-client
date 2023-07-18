@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 const AdminFeedBack = () => {
     const data=useLoaderData();
     const navigate=useNavigate();
-    console.log(data._id)
+    console.log(data)
     const handleFeedback=(event)=>{
         event.preventDefault();
         const form=event.target;
@@ -13,7 +13,7 @@ const AdminFeedBack = () => {
             feedback: feedback
           };
         
-        fetch(`https://summer-school-camp-server.vercel.app/feedback/${data._id}`, {
+        fetch(`https://summer-school-camp-server.vercel.app/${data?._id}`, {
             method: 'PATCH',
             headers: {
                 'content-type': 'application/json'

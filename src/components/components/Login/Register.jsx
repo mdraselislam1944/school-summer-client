@@ -4,9 +4,11 @@ import { FaGofore } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../layout/Providers/AuthProviders';
 import { FaSpinner } from "react-icons/fa";
+import { useForm } from 'react-hook-form';
 
 const Register = () => {
     const { createUser, googleLogin, updateProfileDetail, loading } = useContext(AuthContext);
+    const { register, handleSubmit,reset } = useForm();
     const handleGoogleSignIn = () => {
         googleLogin()
             .then(result => {
@@ -42,18 +44,16 @@ const Register = () => {
                 alert(error.message);
             })
     }
-    const handleRegister = (event) => {
-        event.preventDefault();
-        const form = event.target;
+    const onSubmit = (form) => {
         const register = {
-            name: form.name.value,
-            email: form.email.value,
-            password: form.password.value,
-            image: form.image.value
+            name: form.name,
+            email: form.email,
+            password: form.password,
+            image: form.image
         };
 
         // Access the image file from the form input
-        const imageFile = form.image.files[0];
+        const imageFile = form.image[0];
         // Create a new FormData object
         const formData = new FormData();
         formData.append('image', imageFile);
@@ -69,7 +69,7 @@ const Register = () => {
                 register.image = data.data.display_url;
                 createUser(register.email, register.password)
                     .then(result => {
-                        form.reset();
+                        reset();
                         updateProfileDetail(register.name, register.image)
                             .then(result => {
                             }).catch((error) => {
@@ -110,11 +110,11 @@ const Register = () => {
     return (
         <div className='text-center mx-auto my-5'>
             <h1 className=' my-5 text-4xl'>Please register</h1>
-            <form className='grid grid-cols-1' onSubmit={handleRegister}>
-                <input required type="name" name="name" id="name" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='Enter your name' />
-                <input required type="email" name="email" id="email" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='Enter your Email' />
-                <input required type="password" name="password" id="password" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='password' />
-                <input required type="file" name="image" id="image" className=' w-full max-w-xs mx-auto my-2' />
+            <form className='grid grid-cols-1' onSubmit={handleSubmit(onSubmit)}>
+                <input required type="name" {...register("name")} id="name" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='Enter your name' />
+                <input required type="email" {...register("email")} id="email" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='Enter your Email' />
+                <input required type="password" {...register("password")} id="password" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='password' />
+                <input required type="file" {...register("image")} id="image" className=' w-full max-w-xs mx-auto my-2' />
                 {
                     loading ? <span className='btn btn-success mx-auto w-full max-w-xs'><FaSpinner></FaSpinner></span> : <input className='btn btn-success mx-auto w-full max-w-xs' type="submit" value="register" />
                 }

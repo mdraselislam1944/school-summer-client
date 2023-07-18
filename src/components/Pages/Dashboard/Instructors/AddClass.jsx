@@ -22,7 +22,9 @@ const AddClass = () => {
             discount:form.discount.value,
             status:null,
         };
-
+        if(parseInt(addClass.seat)<10){
+            addClass.seat='0'+addClass.seat;
+        }
         const imageFile = form.image.files[0];
         const formData = new FormData();
         formData.append('image', imageFile);

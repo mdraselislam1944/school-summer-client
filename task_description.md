@@ -224,9 +224,9 @@ Show all approved classes on this page. Each Class will have the following:
 
 4. Make the home page responsive. If possible, Make your entire website responsive\. (It is ok if the table is not responsive\.) 
 
-5. Use tanstack query (react-query) in at least two places. If needed, you can use it everywhere. 
+<!-- 5. Use tanstack query (react-query) in at least two places. If needed, you can use it everywhere.  -->
 
-6. use Axios for at least two calls.
+<!-- 6. use Axios for at least two calls. -->
 
 7.  Must Use [react-hook-form](https://react-hook-form.com/) in the registration & login page. Using react hook form in another place is optional.
 
@@ -236,7 +236,7 @@ Show all approved classes on this page. Each Class will have the following:
 
 </br>
 
-9. Implement  JWT token for Login and Registration systems (Email/ password & social login)\. You will send the token for the Dashboard routes and verify the user\.
+<!-- 9. Implement  JWT token for Login and Registration systems (Email/ password & social login)\. You will send the token for the Dashboard routes and verify the user\. -->
 
 </br>
 

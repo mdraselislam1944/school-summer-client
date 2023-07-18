@@ -4,7 +4,7 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 const Update = () => {
     const Navigate=useNavigate();
     const description = useLoaderData();
-    console.log(description._id)
+    console.log(description)
     const handleUpdateData = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -12,6 +12,7 @@ const Update = () => {
             className: form.name.value,
             seat: form.seat.value,
             price: form.price.value,
+            discount:form.discount.value,
             // image: form.image.value,
         };
         if (form.image.value) {
@@ -48,7 +49,7 @@ const Update = () => {
                     alert('update successfully');
                     form.reset();
                 }
-                Navigate('/dashboard');
+                Navigate('/dashboard/instructor');
             });
     }
 
@@ -57,11 +58,16 @@ const Update = () => {
             <div>
                 <h1 className='font-bold text-3xl'>Update class Information</h1>
                 <form className='grid grid-cols-1' onSubmit={handleUpdateData}>
+                    <label className='mt-2'>Enter your class name</label>
                     <input defaultValue={description?.className} required type="name" name="name" id="name" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='Enter your class name' />
+                    <label className='mt-2'>Enter your class Image</label>
                     <input type="file" name="image" id="image" className=' w-full max-w-xs mx-auto my-2' />
+                    <label className='mt-2'>Enter your class Seat</label>
                     <input defaultValue={description.seat} required type="number" name="seat" id="seat" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='Available seat' />
+                    <label className='mt-2'>Enter your Course Fee</label>
                     <input defaultValue={description.price} required type="number" name="price" id="price" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='price' />
-
+                    <label className='mt-2'>Enter your course Discount</label>
+                    <input defaultValue={description.discount} required type="discount" name="discount" id="discount" className='input input-bordered w-full max-w-xs mx-auto my-2' placeholder='price' />
                     <input className='btn btn-success mx-auto w-full max-w-xs' type="submit" value="Update Class" />
                 </form>
             </div>

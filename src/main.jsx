@@ -22,16 +22,19 @@ import Payment from './components/Pages/Payment/Payment';
 import AddClass from './components/Pages/Dashboard/Instructors/AddClass';
 import Update from './components/Pages/Dashboard/Instructors/Update';
 import AdminFeedBack from './components/Pages/Dashboard/AdminFeedBack';
+import ErrorPage from './components/ErrorPage';
+import Practice from '../practice';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element:<Main></Main>,
+    errorElement:<ErrorPage/>,
     children:[
       {
         path:'/',
         element:<Home/>,
-        loader:()=>fetch('https://summer-school-camp-server.vercel.app/classes'),
+        loader:()=>fetch('https://summer-school-camp-server-mdraselislam1944.vercel.app/popularClass'),
       },
       {
         path:'/login',
@@ -50,6 +53,10 @@ const router = createBrowserRouter([
         path:'/class',
         element:<Classes/>,
         loader:()=>fetch('https://summer-school-camp-server.vercel.app/instructors'),
+      },
+      {
+        path:"/practice",
+        element:<Practice/>
       }
     ]
   },
@@ -57,10 +64,10 @@ const router = createBrowserRouter([
     path:"dashboard",
     element:<Dashboard></Dashboard>,
     children:[
-      {
-        path:"",
-        element:<InstructorsDashboard/>
-      },
+      // {
+      //   path:"",
+      //   element:<InstructorsDashboard/>
+      // },
       {
         path:'admin',
         element:<AdminDashboard/>
@@ -85,12 +92,12 @@ const router = createBrowserRouter([
       {
         path:"instructor/:id",
         element:<Update/>,
-        loader:({params})=>fetch(`https://summer-school-camp-server.vercel.app/instructor/${params.id}`)
+        loader:({params})=>fetch(`https://summer-school-camp-server.vercel.app/instructors/${params.id}`)
       },
       {
         path:"adminFeedback/:id",
         element:<AdminFeedBack/>,
-        loader:({params})=>fetch(`https://summer-school-camp-server.vercel.app/instructor/${params.id}`)
+        loader:({params})=>fetch(`https://summer-school-camp-server.vercel.app/instructors/${params.id}`)
       }
     ]
   }

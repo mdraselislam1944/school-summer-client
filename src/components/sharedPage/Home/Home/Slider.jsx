@@ -9,7 +9,7 @@ import slide5 from '../../../../assets/Image/slide5.jpg'
 const Slider = () => {
     return (
         <>
-            <div className="carousel w-full lg:h-[500px]">
+            <div className="carousel w-full lg:h-[500px]" data-theme={"dark"}>
                 <div id="item1" className="carousel-item w-full relative">
                     <img src={slide1} className="w-full" />
                     <div className='text-white absolute top-1/2 left-1/2' style={{ transform: "translate(-50%, -50%)"}}>
